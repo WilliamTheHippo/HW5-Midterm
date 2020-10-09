@@ -39,9 +39,9 @@ public class Draggable : MonoBehaviour
     {
         sr.sprite = normalSprite;
         sr.color = new Color(1f,1f,1f);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.zero);
-        Debug.Log(hits);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(0,0,2));
+        Debug.Log(hit.collider);
+        //TODO why isn't it hitting?
         //TODO add snapback, glowing, and hooks to other scripts
-        //TODO maybe just the first raycast; not sure if we need to see all the way down
     }
 }
