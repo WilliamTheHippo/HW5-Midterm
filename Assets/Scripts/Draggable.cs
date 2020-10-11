@@ -5,6 +5,11 @@ using UnityEngine;
 public class Draggable : MonoBehaviour
 {
     //NB: I couldn't get OverlapCollider to work, so you have to use a box, sorry
+    public bool respawn;
+    public bool destroy;
+
+    public GameObject respawnPrefab;
+
     public Sprite dragSprite;
     Sprite normalSprite;
     SpriteRenderer sr;
@@ -39,7 +44,8 @@ public class Draggable : MonoBehaviour
     	mousePosition = Input.mousePosition;
     	screenPosition = mousePosition;
     	transform.position = Camera.main.ScreenToWorldPoint(screenPosition) + mouseOffset;
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position,
+        Collider2D[] hits = Physics2D.OverlapBoxAll(
+            transform.position,
             new Vector2(bc.size.x, bc.size.y),
             0
         );
@@ -61,8 +67,15 @@ public class Draggable : MonoBehaviour
         sr.color = new Color(1f,1f,1f);
         if(currentTarget != null)
         {
+            currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f);
             transform.position = currentTarget.transform.position;
             currentTarget.GetComponent<DropTarget>().OnDrop(this.gameObject);
+            if(respawn)
+            {
+                if(respawnPrefab != null) Instantiate(respawnPrefab, originalPosition, Quaternion.identity);
+                Instantiate(this.gameObject, originalPosition, Quaternion.identity);
+            }
+            if(destroy) Destroy(this.gameObject);
         }
         else transform.position = originalPosition;
     }
