@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
+    //NB: I couldn't get OverlapCollider to work, so you have to use a box, sorry
     public Sprite dragSprite;
     Sprite normalSprite;
     SpriteRenderer sr;
+    BoxCollider2D bc;
 
     Vector2 mousePosition;
     Vector3 originalPosition;
 	Vector3 mouseOffset;
 	Vector3 screenPosition;
 
+    GameObject currentTarget;
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        bc = GetComponent<BoxCollider2D>();
         normalSprite = sr.sprite;
+        currentTarget = null;
     }
 
     void OnMouseDown()  //only runs if we're on the collider (also this function apparently uses raycasts)
@@ -33,15 +39,31 @@ public class Draggable : MonoBehaviour
     	mousePosition = Input.mousePosition;
     	screenPosition = mousePosition;
     	transform.position = Camera.main.ScreenToWorldPoint(screenPosition) + mouseOffset;
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position,
+            new Vector2(bc.size.x, bc.size.y),
+            0
+        );
+        if(hits.Length > 1 && hits[1].gameObject.GetComponent<DropTarget>())
+        {
+            currentTarget = hits[1].gameObject;
+            currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,0.7f);
+        }
+        else
+        {
+            if(currentTarget != null) currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f);
+            currentTarget = null;
+        }
     }
 
     void OnMouseUp()
     {
         sr.sprite = normalSprite;
         sr.color = new Color(1f,1f,1f);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(0,0,2));
-        Debug.Log(hit.collider);
-        //TODO why isn't it hitting?
-        //TODO add snapback, glowing, and hooks to other scripts
+        if(currentTarget != null)
+        {
+            transform.position = currentTarget.transform.position;
+            currentTarget.GetComponent<DropTarget>().OnDrop(this.gameObject);
+        }
+        else transform.position = originalPosition;
     }
 }
