@@ -62,7 +62,10 @@ public class Bowl : DropTarget
 
     public void OnDestroy()
     {
-    	GameObject respawn = Instantiate(respawnPrefab, respawnPosition, Quaternion.identity);
-    	respawn.GetComponent<Ingredient>().type = contains;
+    	if(gameObject.scene.isLoaded) //editor panics if we don't do this check
+    	{
+	    	GameObject respawn = Instantiate(respawnPrefab, respawnPosition, Quaternion.identity);
+	    	respawn.GetComponent<Ingredient>().type = contains;
+	    }
     }
 }
