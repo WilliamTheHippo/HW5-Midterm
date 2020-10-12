@@ -12,11 +12,13 @@ public class Bowl : DropTarget
 	public Sprite prepSprite;
 	public Sprite fullSprite;
 	public float prepSpeed;
+	float prepSpeedModified;
 
 	public GameObject respawnPrefab;
 
 	SpriteRenderer sr;
 	Vector3 respawnPosition;
+	Vector3 respawnScale;
 
     public void Start()
     {
@@ -36,7 +38,9 @@ public class Bowl : DropTarget
     public override void OnDrop(GameObject dropped)
     {
     	respawnPosition = dropped.GetComponent<Draggable>().OriginalPosition();
+    	respawnScale = dropped.transform.localScale;
     	contains = dropped.GetComponent<Ingredient>().type;
+    	prepSpeedModified = prepSpeed * dropped.GetComponent<Ingredient>().speedModifier;
     	StartCoroutine("Prep");
     }
 
@@ -47,7 +51,7 @@ public class Bowl : DropTarget
     	//TODO replace this color shift with an animation
     	sr.sprite = prepSprite;
     	sr.color = new Color(1f,.5f,.5f);
-    	for(float i = .5f; i <= 1; i += prepSpeed)
+    	for(float i = .5f; i <= 1; i += prepSpeedModified)
     	{
     		sr.color = new Color(1,i,i);
     		yield return new WaitForSeconds(.1f);
@@ -66,6 +70,7 @@ public class Bowl : DropTarget
     	if(gameObject.scene.isLoaded) //editor panics if we don't do this check
     	{
 	    	GameObject respawn = Instantiate(respawnPrefab, respawnPosition, Quaternion.identity);
+	    	respawn.transform.localScale = respawnScale;
 	    	respawn.GetComponent<Ingredient>().type = contains;
 	    }
     }
