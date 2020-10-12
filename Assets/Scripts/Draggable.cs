@@ -49,7 +49,10 @@ public class Draggable : MonoBehaviour
             new Vector2(bc.size.x, bc.size.y),
             0
         );
-        if(hits.Length > 1 && hits[1].gameObject.GetComponent<DropTarget>())
+        if( hits.Length > 1 &&
+            hits[1].gameObject.GetComponent<DropTarget>() &&
+            hits[1].gameObject.GetComponent<DropTarget>().CheckObject(this.gameObject)
+          )
         {
             currentTarget = hits[1].gameObject;
             currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,0.7f);
@@ -79,4 +82,6 @@ public class Draggable : MonoBehaviour
         }
         else transform.position = originalPosition;
     }
+
+    public Vector3 OriginalPosition() {return originalPosition;}
 }

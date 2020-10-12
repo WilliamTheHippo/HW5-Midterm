@@ -2,15 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bowl : MonoBehaviour
+public class Bowl : DropTarget
 {
-    //"contains" enum shows what kind of food it contains (food enum shared with Ingredient.cs)
-    //draggable enabled only when food is prepped
-    //show prepping with color shift for now, animation later
+	public Ingredient.FoodType contains;
+	public bool full;
+	public bool prepping;
+
+	//TODO replace these sprites with an animation
+	public Sprite prepSprite;
+	public Sprite fullSprite;
+
+	public GameObject respawnPrefab;
+
+	SpriteRenderer sr;
+	Vector3 respawnPosition;
+
+    public void Start()
+    {
+    	full = false;
+    	prepping = false;
+    	GetComponent<Draggable>().enabled = false;
+    	sr = GetComponent<SpriteRenderer>();
+    }
+
+    public override bool CheckObject(GameObject check)
+    {
+    	if(full) return false;
+    	if(check.tag != "Ingredient") return false;
+    	return true;
+    }
+
+    public override void OnDrop(GameObject dropped)
+    {
+    	respawnPosition = dropped.GetComponent<Draggable>().OriginalPosition();
+    	contains = dropped.GetComponent<Ingredient>().type;
+    	StartCoroutine("Prep");
+    }
+
+    IEnumerator Prep()
+    {
+    	prepping = true;
+
+    	//TODO replace this color shift with an animation
+    	sr.sprite = prepSprite;
+    	sr.color = new Color(1f,.5f,.5f);
+    	for(float i = .5f; i <= 1; i += 0.1f)
+    	{
+    		sr.color = new Color(1,i,i);
+    		yield return new WaitForSeconds(.1f);
+    	}
+    	sr.sprite = fullSprite;
+
+    	full = true;
+    	prepping = false;
+    	GetComponent<Draggable>().enabled = true;
+    	yield return null;
+    }
 
     public void OnDestroy()
     {
-    	//respawn contained ingredient
-    	//(Draggable.cs should respawn the bowl)
+    	GameObject respawn = Instantiate(respawnPrefab, respawnPosition, Quaternion.identity);
+    	respawn.GetComponent<Ingredient>().type = contains;
     }
 }

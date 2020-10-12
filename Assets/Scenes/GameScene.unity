@@ -133,9 +133,10 @@ GameObject:
   - component: {fileID: 485200410}
   - component: {fileID: 485200413}
   - component: {fileID: 485200412}
+  - component: {fileID: 485200414}
   m_Layer: 0
   m_Name: Bowl
-  m_TagString: Untagged
+  m_TagString: Bowl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485200409}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c7177483647c4fcb9d2c79465bcb72a, type: 3}
   m_Name: 
@@ -247,6 +248,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
+--- !u!114 &485200414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485200409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a12e688d9db4984b962357345c2ccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contains: 0
+  full: 0
+  prepping: 0
+  prepSprite: {fileID: -1487115593391120714, guid: 31577433ce29b4c659c2290ffa788f0d,
+    type: 3}
 --- !u!1 &750963439
 GameObject:
   m_ObjectHideFlags: 0
