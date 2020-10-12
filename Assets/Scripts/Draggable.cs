@@ -22,6 +22,8 @@ public class Draggable : MonoBehaviour
 
     GameObject currentTarget;
 
+    bool clicked;
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -32,6 +34,8 @@ public class Draggable : MonoBehaviour
 
     void OnMouseDown()  //only runs if we're on the collider (also this function apparently uses raycasts)
     {
+        if(!enabled) return; //unity why
+        clicked = true;
         if(dragSprite != null) sr.sprite = dragSprite;
         sr.color = new Color(1f,0.7f,0.7f);
         originalPosition = transform.position;
@@ -41,6 +45,7 @@ public class Draggable : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if(!enabled || !clicked) return;
     	mousePosition = Input.mousePosition;
     	screenPosition = mousePosition;
     	transform.position = Camera.main.ScreenToWorldPoint(screenPosition) + mouseOffset;
@@ -66,6 +71,8 @@ public class Draggable : MonoBehaviour
 
     void OnMouseUp()
     {
+        if(!enabled || !clicked) return;
+        clicked = false;
         sr.sprite = normalSprite;
         sr.color = new Color(1f,1f,1f);
         if(currentTarget != null)

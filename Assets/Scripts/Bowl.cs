@@ -51,6 +51,7 @@ public class Bowl : DropTarget
     		sr.color = new Color(1,i,i);
     		yield return new WaitForSeconds(.1f);
     	}
+    	sr.color = new Color(1,1,1);
     	sr.sprite = fullSprite;
 
     	full = true;
