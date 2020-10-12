@@ -51,7 +51,10 @@ public class Draggable : MonoBehaviour
     	transform.position = Camera.main.ScreenToWorldPoint(screenPosition) + mouseOffset;
         Collider2D[] hits = Physics2D.OverlapBoxAll(
             transform.position,
-            new Vector2(bc.size.x, bc.size.y),
+            new Vector2(
+                bc.size.x * transform.localScale.x,
+                bc.size.y * transform.localScale.y
+            ),
             0
         );
         if( hits.Length > 1 &&
