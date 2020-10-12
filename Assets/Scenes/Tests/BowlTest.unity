@@ -361,5 +361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bowl
       objectReference: {fileID: 0}
+    - target: {fileID: 4710803775078895940, guid: b77bbc689df9c4d428803cc3796cdb47,
+        type: 3}
+      propertyPath: prepSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77bbc689df9c4d428803cc3796cdb47, type: 3}

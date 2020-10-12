@@ -11,6 +11,7 @@ public class Bowl : DropTarget
 	//TODO replace these sprites with an animation
 	public Sprite prepSprite;
 	public Sprite fullSprite;
+	public float prepSpeed;
 
 	public GameObject respawnPrefab;
 
@@ -46,7 +47,7 @@ public class Bowl : DropTarget
     	//TODO replace this color shift with an animation
     	sr.sprite = prepSprite;
     	sr.color = new Color(1f,.5f,.5f);
-    	for(float i = .5f; i <= 1; i += 0.1f)
+    	for(float i = .5f; i <= 1; i += prepSpeed)
     	{
     		sr.color = new Color(1,i,i);
     		yield return new WaitForSeconds(.1f);
