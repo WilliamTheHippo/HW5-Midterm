@@ -7,6 +7,8 @@ public class Pot : DropTarget
     public List<Ingredient.FoodType> required;
     List<Ingredient.FoodType> contains;
 
+    public Table table;
+
     public bool cooking;
     public bool cooked;
     public int cookingTime;
@@ -22,6 +24,7 @@ public class Pot : DropTarget
 
     public void Start()
     {
+        table = null;
     	sr = GetComponent<SpriteRenderer>();
     	emptySprite = sr.sprite;
     	contains = new List<Ingredient.FoodType>();
@@ -106,5 +109,10 @@ public class Pot : DropTarget
     		//respawn.contains = new List<Ingredient.FoodType>(); //handled by Start()?
     	}
     	yield return null;
+    }
+
+    public void OnDestroy()
+    {
+        if(table != null) table.GetComponent<Table>().full = false;
     }
 }
