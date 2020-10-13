@@ -139,3 +139,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  speedModifier: 1
+  sprites:
+  - {fileID: 411465521359049025, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
+  - {fileID: 3416722320431985956, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
+  - {fileID: -5145311920877871996, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
+  - {fileID: -5556213916453820983, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
+  - {fileID: -604682520381900850, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}

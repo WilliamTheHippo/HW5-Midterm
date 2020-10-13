@@ -11,6 +11,7 @@ public class Bowl : DropTarget
 	//TODO replace these sprites with an animation
 	public Sprite prepSprite;
 	public Sprite fullSprite;
+	public Sprite emptySprite;
 	public float prepSpeed;
 	float prepSpeedModified;
 
@@ -20,12 +21,17 @@ public class Bowl : DropTarget
 	Vector3 respawnPosition;
 	Vector3 respawnScale;
 
+	GameObject indicator;
+
     public void Start()
     {
     	full = false;
     	prepping = false;
     	GetComponent<Draggable>().enabled = false;
     	sr = GetComponent<SpriteRenderer>();
+    	sr.sprite = emptySprite;
+    	indicator = transform.GetChild(0).gameObject;
+    	indicator.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public override bool CheckObject(GameObject check)
@@ -40,6 +46,8 @@ public class Bowl : DropTarget
     	respawnPosition = dropped.GetComponent<Draggable>().OriginalPosition();
     	respawnScale = dropped.transform.localScale;
     	contains = dropped.GetComponent<Ingredient>().type;
+    	indicator.GetComponent<SpriteRenderer>().sprite = dropped.GetComponent<SpriteRenderer>().sprite;
+    	indicator.GetComponent<SpriteRenderer>().enabled = true;
     	prepSpeedModified = prepSpeed * dropped.GetComponent<Ingredient>().speedModifier;
     	StartCoroutine("Prep");
     }

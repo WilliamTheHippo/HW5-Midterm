@@ -94,4 +94,6 @@ public class Draggable : MonoBehaviour
     }
 
     public Vector3 OriginalPosition() {return originalPosition;}
+    public bool IsBeingDragged() {return clicked;}
+    public void SetNormalSprite(Sprite s) {normalSprite = s;}
 }

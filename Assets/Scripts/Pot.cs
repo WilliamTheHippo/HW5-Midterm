@@ -8,10 +8,21 @@ public class Pot : DropTarget
     List<Ingredient.FoodType> contains;
 
     public bool cooking;
+    public bool cooked;
     public int cookingTime;
+    public float coolingTime;
+
+    //TODO replace these sprites with an animation
+    public Sprite cookingSprite;
+    public Sprite cookedSprite;
+    Sprite emptySprite;
+
+    SpriteRenderer sr;
 
     public void Start()
     {
+    	sr = GetComponent<SpriteRenderer>();
+    	emptySprite = sr.sprite;
     	contains = new List<Ingredient.FoodType>();
     	cooking = false;
     	GetComponent<Draggable>().enabled = false;
@@ -41,6 +52,19 @@ public class Pot : DropTarget
     {
     	//TODO instantiate timer?
     	cooking = true;
+
+    	//TODO replace this color change with an animation
+    	sr.sprite = cookingSprite;
+    	sr.color = new Color(1f,.5f,.5f);
+    	for(int i = cookingTime; i > 0; i--)
+    	{
+    		yield return new WaitForSeconds(1);
+    	}
+    	sr.color = new Color(1,1,1);
+    	sr.sprite = cookedSprite;
+
+    	cooked = true;
+    	GetComponent<Draggable>().enabled = true;
     	StartCoroutine("Cool");
     	yield return null;
     }
@@ -48,6 +72,24 @@ public class Pot : DropTarget
     IEnumerator Cool()
     {
     	//TODO instantiate cooling indicator?
+    	for(float i = 0; i < coolingTime/10; i += .01f)
+    	{
+    		if(!GetComponent<Draggable>().IsBeingDragged())
+    		{
+    			sr.color = new Color(1-i/5, 1-i/5, 1);
+    		}
+    		yield return new WaitForSeconds(.1f);
+    	}
+
+    	if(!GetComponent<Draggable>().IsBeingDragged())
+    	{
+    		Destroy(this.gameObject);
+    		GameObject respawn = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+    		respawn.GetComponent<SpriteRenderer>().color = new Color(1,1,1);
+    		respawn.GetComponent<SpriteRenderer>().sprite = emptySprite;
+    		respawn.GetComponent<Pot>().required = contains;
+    		//respawn.contains = new List<Ingredient.FoodType>(); //handled by Start()?
+    	}
     	yield return null;
     }
 }
