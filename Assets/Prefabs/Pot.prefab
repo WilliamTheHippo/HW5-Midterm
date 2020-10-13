@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2304549434456361877}
   m_Layer: 0
   m_Name: Pot
-  m_TagString: Untagged
+  m_TagString: Pot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawn: 0
-  destroy: 1
+  destroy: 0
   respawnPrefab: {fileID: 0}
   dragSprite: {fileID: 0}
 --- !u!114 &2304549434456361877
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   required: 0000000001000000
+  table: {fileID: 0}
   cooking: 0
   cooked: 0
   cookingTime: 5

@@ -22,8 +22,11 @@ public class Pot : DropTarget
 
     SpriteRenderer sr;
 
+    Vector3 originalPosition;
+
     public void Start()
     {
+        originalPosition = transform.position;
         table = null;
     	sr = GetComponent<SpriteRenderer>();
     	emptySprite = sr.sprite;
@@ -52,7 +55,7 @@ public class Pot : DropTarget
     	Ingredient.FoodType bowlContents = dropped.GetComponent<Bowl>().contains;
     	if(required.Contains(bowlContents))
     	{
-    		for(int i = 0; i < required.Count; i++)
+    		for(int i = 0; i < required.Count + contains.Count; i++)
     		{
     			SpriteRenderer tmp_sr = transform.GetChild(i).GetComponent<SpriteRenderer>();
     			if(tmp_sr.sprite == ingredientSprites[(int)bowlContents])
@@ -102,7 +105,7 @@ public class Pot : DropTarget
     	if(!GetComponent<Draggable>().IsBeingDragged())
     	{
     		Destroy(this.gameObject);
-    		GameObject respawn = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+    		GameObject respawn = Instantiate(this.gameObject, originalPosition, Quaternion.identity);
     		respawn.GetComponent<SpriteRenderer>().color = new Color(1,1,1);
     		respawn.GetComponent<SpriteRenderer>().sprite = emptySprite;
     		respawn.GetComponent<Pot>().required = contains;

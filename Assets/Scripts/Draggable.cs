@@ -62,6 +62,10 @@ public class Draggable : MonoBehaviour
             hits[1].gameObject.GetComponent<DropTarget>().CheckObject(this.gameObject)
           )
         {
+            if(currentTarget != null && currentTarget != hits[1].gameObject)
+            {
+                currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f);
+            }
             currentTarget = hits[1].gameObject;
             currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,0.7f);
         }

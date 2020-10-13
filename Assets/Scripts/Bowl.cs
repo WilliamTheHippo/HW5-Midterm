@@ -36,7 +36,7 @@ public class Bowl : DropTarget
 
     public override bool CheckObject(GameObject check)
     {
-    	if(full) return false;
+    	if(full || prepping) return false;
     	if(check.tag != "Ingredient") return false;
     	return true;
     }
