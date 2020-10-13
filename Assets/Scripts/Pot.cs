@@ -31,12 +31,7 @@ public class Pot : DropTarget
     	sr = GetComponent<SpriteRenderer>();
     	emptySprite = sr.sprite;
     	contains = new List<Ingredient.FoodType>();
-    	for(int i = 0; i < required.Count; i++)
-    	{
-    		SpriteRenderer tmp_sr = transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
-    		tmp_sr.sprite = ingredientSprites[(int)required[i]];
-    		tmp_sr.enabled = true;
-    	}
+    	PopulateIndicators();
     	cooking = false;
     	GetComponent<Draggable>().enabled = false;
     }
@@ -109,6 +104,7 @@ public class Pot : DropTarget
     		respawn.GetComponent<SpriteRenderer>().color = new Color(1,1,1);
     		respawn.GetComponent<SpriteRenderer>().sprite = emptySprite;
     		respawn.GetComponent<Pot>().required = contains;
+            respawn.GetComponent<Pot>().PopulateIndicators();
     		//respawn.contains = new List<Ingredient.FoodType>(); //handled by Start()?
     	}
     	yield return null;
@@ -117,5 +113,15 @@ public class Pot : DropTarget
     public void OnDestroy()
     {
         if(table != null) table.GetComponent<Table>().full = false;
+    }
+
+    public void PopulateIndicators()
+    {
+        for(int i = 0; i < required.Count; i++)
+        {
+            SpriteRenderer tmp_sr = transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
+            tmp_sr.sprite = ingredientSprites[(int)required[i]];
+            tmp_sr.enabled = true;
+        }
     }
 }
