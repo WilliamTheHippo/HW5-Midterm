@@ -14,4 +14,9 @@ public class Ingredient : MonoBehaviour
     	GetComponent<SpriteRenderer>().sprite = sprites[(int)type]; //hacky hacky
     	GetComponent<Draggable>().SetNormalSprite(sprites[(int)type]);
     }
+
+    public Sprite TypeToSprite(FoodType type)
+    {
+    	return sprites[(int)type];
+    }
 }

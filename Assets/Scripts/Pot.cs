@@ -15,6 +15,7 @@ public class Pot : DropTarget
     //TODO replace these sprites with an animation
     public Sprite cookingSprite;
     public Sprite cookedSprite;
+    public Sprite[] ingredientSprites;
     Sprite emptySprite;
 
     SpriteRenderer sr;
@@ -24,6 +25,12 @@ public class Pot : DropTarget
     	sr = GetComponent<SpriteRenderer>();
     	emptySprite = sr.sprite;
     	contains = new List<Ingredient.FoodType>();
+    	for(int i = 0; i < required.Count; i++)
+    	{
+    		SpriteRenderer tmp_sr = transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();
+    		tmp_sr.sprite = ingredientSprites[(int)required[i]];
+    		tmp_sr.enabled = true;
+    	}
     	cooking = false;
     	GetComponent<Draggable>().enabled = false;
     }
@@ -42,6 +49,14 @@ public class Pot : DropTarget
     	Ingredient.FoodType bowlContents = dropped.GetComponent<Bowl>().contains;
     	if(required.Contains(bowlContents))
     	{
+    		for(int i = 0; i < required.Count; i++)
+    		{
+    			SpriteRenderer tmp_sr = transform.GetChild(i).GetComponent<SpriteRenderer>();
+    			if(tmp_sr.sprite == ingredientSprites[(int)bowlContents])
+    			{
+    				tmp_sr.enabled = false;
+    			}
+    		}
     		required.Remove(bowlContents);
     		contains.Add(bowlContents);
     	}
