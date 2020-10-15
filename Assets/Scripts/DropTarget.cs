@@ -5,5 +5,5 @@ using UnityEngine;
 public abstract class DropTarget : MonoBehaviour
 {
 	public abstract bool CheckObject(GameObject check);
-    public abstract void OnDrop(GameObject dropped);
+	public abstract void OnDrop(GameObject dropped);
 }

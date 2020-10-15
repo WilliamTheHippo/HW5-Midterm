@@ -18,9 +18,9 @@ public class Table : DropTarget
 		return true;
 	}
 
-    public override void OnDrop(GameObject dropped)
-    {
-    	full = true;
-    	dropped.GetComponent<Pot>().table = this;
-    }
+	public override void OnDrop(GameObject dropped)
+	{
+		full = true;
+		dropped.GetComponent<Pot>().table = this;
+	}
 }
