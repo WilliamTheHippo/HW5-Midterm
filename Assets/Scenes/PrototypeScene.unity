@@ -520,7 +520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f752555ffa3a46f4ae25a48b8e2bbad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meals: []
+  meals:
+  - {fileID: 0}
   tables: []
   potSlots: 0
 --- !u!1001 &438008434

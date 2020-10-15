@@ -8,6 +8,7 @@ public class Pot : DropTarget
 	List<Ingredient.FoodType> contains;
 
 	public Table table;
+	//public Meal partOfMeal;
 
 	public bool cooking;
 	public bool cooked;

@@ -37,6 +37,7 @@ public class Meal : MonoBehaviour
 			}
 		}
 		GameObject pot = Instantiate(potPrefab, spawnPos, Quaternion.identity);
+		//pot.GetComponent<Pot>().partOfMeal = this;
 		pots.Add(pot);
 	}
 
