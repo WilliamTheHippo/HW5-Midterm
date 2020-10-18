@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Table : DropTarget
 {
+	public int currentMeal;
 	public bool full;
+
+	public Pot pot;
 
 	public void Start()
 	{
+		//currentMeal = 0; //WTFrickityFrak??
 		full = false;
 	}
 	
@@ -15,6 +19,7 @@ public class Table : DropTarget
 	{
 		if(check.tag != "Pot") return false;
 		if(!check.GetComponent<Pot>().cooked) return false;
+		if(check.GetComponent<Pot>().mealNumber != currentMeal) return false;
 		return true;
 	}
 
@@ -22,5 +27,6 @@ public class Table : DropTarget
 	{
 		full = true;
 		dropped.GetComponent<Pot>().table = this;
+		pot = dropped.GetComponent<Pot>();
 	}
 }

@@ -8,6 +8,8 @@ public class Pot : DropTarget
 	List<Ingredient.FoodType> contains;
 
 	public Table table;
+	public int mealNumber;
+	public Color mealColor;
 	//public Meal partOfMeal;
 
 	public bool cooking;
@@ -27,6 +29,7 @@ public class Pot : DropTarget
 
 	public void Start()
 	{
+		mealNumber = 0; //"0" means unassigned
 		originalPosition = transform.position;
 		table = null;
 		sr = GetComponent<SpriteRenderer>();
@@ -77,7 +80,7 @@ public class Pot : DropTarget
 		{
 			yield return new WaitForSeconds(1);
 		}
-		sr.color = new Color(1,1,1);
+		sr.color = mealColor;
 		sr.sprite = cookedSprite;
 
 		cooked = true;
@@ -125,4 +128,7 @@ public class Pot : DropTarget
 			tmp_sr.enabled = true;
 		}
 	}
+
+	public Vector3 StartingPosition() {return originalPosition;}
+	public void RefreshColor() {sr.color = mealColor;}
 }
