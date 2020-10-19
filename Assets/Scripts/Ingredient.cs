@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
-	public enum FoodType {Type1, Type2, Type3, Type4, Type5}
+	public enum FoodType {Vegetables, Dairy, Meat, Chicken, Grains}
 	public FoodType type;
 	public float speedModifier = 1;
 	public Sprite[] sprites;

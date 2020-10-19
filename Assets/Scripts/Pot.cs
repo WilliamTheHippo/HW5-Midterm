@@ -24,6 +24,7 @@ public class Pot : DropTarget
 	Sprite emptySprite;
 
 	SpriteRenderer sr;
+	Animator animator;
 
 	Vector3 originalPosition;
 
@@ -33,6 +34,7 @@ public class Pot : DropTarget
 		originalPosition = transform.position;
 		table = null;
 		sr = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
 		emptySprite = sr.sprite;
 		contains = new List<Ingredient.FoodType>();
 		PopulateIndicators();
@@ -51,6 +53,7 @@ public class Pot : DropTarget
 
 	public override void OnDrop(GameObject dropped)
 	{
+		animator.SetBool("Empty", false);
 		Ingredient.FoodType bowlContents = dropped.GetComponent<Bowl>().contains;
 		if(required.Contains(bowlContents))
 		{
@@ -73,9 +76,9 @@ public class Pot : DropTarget
 		//TODO instantiate timer?
 		cooking = true;
 
-		//TODO replace this color change with an animation
 		sr.sprite = cookingSprite;
-		sr.color = new Color(1f,.5f,.5f);
+		//sr.color = new Color(1f,.5f,.5f);
+		animator.SetBool("Cooking", true);
 		for(int i = cookingTime; i > 0; i--)
 		{
 			yield return new WaitForSeconds(1);
@@ -91,6 +94,7 @@ public class Pot : DropTarget
 
 	IEnumerator Cool()
 	{
+		animator.SetBool("Cooling", true);
 		//TODO instantiate cooling indicator?
 		for(float i = 0; i < coolingTime/10; i += .01f)
 		{

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2304549434456361874}
   - component: {fileID: 2304549434456361875}
   - component: {fileID: 2304549434456361877}
+  - component: {fileID: 3680901125629593032}
   m_Layer: 0
   m_Name: Pot
   m_TagString: Pot
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: -5649470061204452833, guid: 73023e303f65046a2b3554d7bb4d4f55,
+  m_Sprite: {fileID: -5649470061204452833, guid: 148ea066310ab4aefbd81f3a5595f363,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -105,7 +106,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 6.4, y: 6.4}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -144,20 +145,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   required: 0000000001000000
   table: {fileID: 0}
+  mealNumber: 0
+  mealColor: {r: 0, g: 0, b: 0, a: 0}
   cooking: 0
   cooked: 0
   cookingTime: 5
   coolingTime: 15
-  cookingSprite: {fileID: 4013556964861115096, guid: 73023e303f65046a2b3554d7bb4d4f55,
+  cookingSprite: {fileID: 5378960067796787707, guid: 148ea066310ab4aefbd81f3a5595f363,
     type: 3}
-  cookedSprite: {fileID: -5615931719996329462, guid: 73023e303f65046a2b3554d7bb4d4f55,
+  cookedSprite: {fileID: -4048233291021119101, guid: 148ea066310ab4aefbd81f3a5595f363,
     type: 3}
   ingredientSprites:
-  - {fileID: 411465521359049025, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
-  - {fileID: 3416722320431985956, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
-  - {fileID: -5145311920877871996, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
-  - {fileID: -5556213916453820983, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
-  - {fileID: -604682520381900850, guid: 0ec4b1529a6d54cd99896bef74825443, type: 3}
+  - {fileID: -7576874432042752839, guid: dd9fd21759a7640869a8ca7259692dee, type: 3}
+  - {fileID: -2432301806248295829, guid: dd9fd21759a7640869a8ca7259692dee, type: 3}
+  - {fileID: 7641124845627605941, guid: dd9fd21759a7640869a8ca7259692dee, type: 3}
+  - {fileID: 7781682652552636025, guid: dd9fd21759a7640869a8ca7259692dee, type: 3}
+  - {fileID: 7355374725913390886, guid: dd9fd21759a7640869a8ca7259692dee, type: 3}
+--- !u!95 &3680901125629593032
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304549434456361878}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4d59b383044ce47d0b8436a2ac8be555, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2655763588600971097
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +250,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e3b7977e55da4b138a5aa65d801ccd9, type: 3}
+  m_Sprite: {fileID: 8474640244576014681, guid: dd9fd21759a7640869a8ca7259692dee,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -309,7 +332,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e3b7977e55da4b138a5aa65d801ccd9, type: 3}
+  m_Sprite: {fileID: 8474640244576014681, guid: dd9fd21759a7640869a8ca7259692dee,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -390,7 +414,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 1e3b7977e55da4b138a5aa65d801ccd9, type: 3}
+  m_Sprite: {fileID: 8474640244576014681, guid: dd9fd21759a7640869a8ca7259692dee,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

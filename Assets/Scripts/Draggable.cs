@@ -14,6 +14,7 @@ public class Draggable : MonoBehaviour
 	Sprite normalSprite;
 	SpriteRenderer sr;
 	BoxCollider2D bc;
+	Animator animator;
 
 	Vector2 mousePosition;
 	Vector3 originalPosition;
@@ -28,6 +29,7 @@ public class Draggable : MonoBehaviour
 	{
 		sr = GetComponent<SpriteRenderer>();
 		bc = GetComponent<BoxCollider2D>();
+		animator = GetComponent<Animator>();
 		normalSprite = sr.sprite;
 		currentTarget = null;
 	}
@@ -37,6 +39,7 @@ public class Draggable : MonoBehaviour
 		if(!enabled) return; //unity why
 		clicked = true;
 		if(dragSprite != null) sr.sprite = dragSprite;
+		if(animator != null) animator.SetBool("Dragging", true);
 		sr.color = new Color(1f,0.7f,0.7f);
 		originalPosition = transform.position;
 		mousePosition = Input.mousePosition;
@@ -67,7 +70,7 @@ public class Draggable : MonoBehaviour
 				currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f);
 			}
 			currentTarget = hits[1].gameObject;
-			currentTarget.GetComponent<SpriteRenderer>().color = new Color(1f,1f,0.7f);
+			currentTarget.GetComponent<SpriteRenderer>().color = new Color(0.7f,1f,0.7f);
 		}
 		else
 		{
@@ -81,6 +84,7 @@ public class Draggable : MonoBehaviour
 		if(!enabled || !clicked) return;
 		clicked = false;
 		sr.sprite = normalSprite;
+		if(animator != null) animator.SetBool("Dragging", false);
 		sr.color = new Color(1f,1f,1f);
 		if(currentTarget != null)
 		{

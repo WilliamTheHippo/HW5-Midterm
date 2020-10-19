@@ -18,6 +18,7 @@ public class Bowl : DropTarget
 	public GameObject respawnPrefab;
 
 	SpriteRenderer sr;
+	Animator animator;
 	Vector3 respawnPosition;
 	Vector3 respawnScale;
 
@@ -29,6 +30,7 @@ public class Bowl : DropTarget
 		prepping = false;
 		GetComponent<Draggable>().enabled = false;
 		sr = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
 		sr.sprite = emptySprite;
 		indicator = transform.GetChild(0).gameObject;
 		indicator.GetComponent<SpriteRenderer>().enabled = false;
@@ -58,6 +60,7 @@ public class Bowl : DropTarget
 
 		//TODO replace this color shift with an animation
 		sr.sprite = prepSprite;
+		animator.SetBool("Prepping", true);
 		sr.color = new Color(1f,.5f,.5f);
 		for(float i = .5f; i <= 1; i += prepSpeedModified)
 		{
@@ -66,6 +69,7 @@ public class Bowl : DropTarget
 		}
 		sr.color = new Color(1,1,1);
 		sr.sprite = fullSprite;
+		animator.SetBool("Prepped", true);
 
 		full = true;
 		prepping = false;
