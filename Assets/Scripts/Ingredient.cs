@@ -9,10 +9,14 @@ public class Ingredient : MonoBehaviour
 	public FoodType type;
 	public float speedModifier = 1;
 	public Sprite[] sprites;
+	public AudioClip[] sounds;
+
+	AudioClip clip;
 
 	public void Start()
 	{
 		GetComponent<SpriteRenderer>().sprite = sprites[(int)type]; //hacky hacky
+		clip = sounds[(int)type];
 		GetComponent<Draggable>().SetNormalSprite(sprites[(int)type]);
 	}
 
@@ -31,4 +35,6 @@ public class Ingredient : MonoBehaviour
 		}
 		return recipe;
 	}
+
+	public AudioClip Clip() {return clip;}
 }

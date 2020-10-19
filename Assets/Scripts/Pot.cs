@@ -25,6 +25,9 @@ public class Pot : DropTarget
 
 	SpriteRenderer sr;
 	Animator animator;
+	AudioSource sound;
+	public AudioClip dump;
+	public AudioClip cook;
 
 	Vector3 originalPosition;
 
@@ -35,6 +38,7 @@ public class Pot : DropTarget
 		table = null;
 		sr = GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
+		sound = GetComponent<AudioSource>();
 		emptySprite = sr.sprite;
 		contains = new List<Ingredient.FoodType>();
 		PopulateIndicators();
@@ -54,6 +58,11 @@ public class Pot : DropTarget
 	public override void OnDrop(GameObject dropped)
 	{
 		animator.SetBool("Empty", false);
+		if(required.Count > 0)
+		{
+			sound.clip = dump;
+			sound.Play();
+		}
 		Ingredient.FoodType bowlContents = dropped.GetComponent<Bowl>().contains;
 		if(required.Contains(bowlContents))
 		{
@@ -68,7 +77,12 @@ public class Pot : DropTarget
 			required.Remove(bowlContents);
 			contains.Add(bowlContents);
 		}
-		if(required.Count == 0) StartCoroutine("Cook");
+		if(required.Count == 0)
+		{
+			sound.clip = cook;
+			sound.Play();
+			StartCoroutine("Cook");
+		}
 	}
 
 	IEnumerator Cook()
@@ -113,6 +127,11 @@ public class Pot : DropTarget
 			respawn.GetComponent<SpriteRenderer>().sprite = emptySprite;
 			respawn.GetComponent<Pot>().required = contains;
 			respawn.GetComponent<Pot>().PopulateIndicators();
+			//wtf why do I need to do this all of a sudden
+			respawn.GetComponent<Pot>().enabled = true;
+			respawn.GetComponent<AudioSource>().enabled = true;
+			respawn.GetComponent<Animator>().enabled = true;
+			respawn.GetComponent<BoxCollider2D>().enabled = true;
 			//respawn.contains = new List<Ingredient.FoodType>(); //handled by Start()?
 		}
 		yield return null;

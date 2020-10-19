@@ -9,10 +9,13 @@ public class Table : DropTarget
 
 	public Pot pot;
 
+	AudioSource sound;
+
 	public void Start()
 	{
 		//currentMeal = 0; //WTFrickityFrak??
 		full = false;
+		sound = GetComponent<AudioSource>();
 	}
 	
 	public override bool CheckObject(GameObject check)
@@ -25,6 +28,7 @@ public class Table : DropTarget
 
 	public override void OnDrop(GameObject dropped)
 	{
+		sound.Play();
 		full = true;
 		dropped.GetComponent<Animator>().SetBool("Plated", true);
 		dropped.GetComponent<Pot>().table = this;

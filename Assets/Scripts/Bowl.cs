@@ -19,6 +19,7 @@ public class Bowl : DropTarget
 
 	SpriteRenderer sr;
 	Animator animator;
+	AudioSource sound;
 	Vector3 respawnPosition;
 	Vector3 respawnScale;
 
@@ -31,6 +32,7 @@ public class Bowl : DropTarget
 		GetComponent<Draggable>().enabled = false;
 		sr = GetComponent<SpriteRenderer>();
 		animator = GetComponent<Animator>();
+		sound = GetComponent<AudioSource>();
 		sr.sprite = emptySprite;
 		indicator = transform.GetChild(0).gameObject;
 		indicator.GetComponent<SpriteRenderer>().enabled = false;
@@ -48,9 +50,11 @@ public class Bowl : DropTarget
 		respawnPosition = dropped.GetComponent<Draggable>().OriginalPosition();
 		respawnScale = dropped.transform.localScale;
 		contains = dropped.GetComponent<Ingredient>().type;
+		sound.clip = dropped.GetComponent<Ingredient>().Clip();
 		indicator.GetComponent<SpriteRenderer>().sprite = dropped.GetComponent<SpriteRenderer>().sprite;
 		indicator.GetComponent<SpriteRenderer>().enabled = true;
 		prepSpeedModified = prepSpeed * dropped.GetComponent<Ingredient>().speedModifier;
+		sound.Play();
 		StartCoroutine("Prep");
 	}
 
