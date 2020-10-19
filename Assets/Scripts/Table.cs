@@ -26,6 +26,7 @@ public class Table : DropTarget
 	public override void OnDrop(GameObject dropped)
 	{
 		full = true;
+		dropped.GetComponent<Animator>().SetBool("Plated", true);
 		dropped.GetComponent<Pot>().table = this;
 		pot = dropped.GetComponent<Pot>();
 	}
