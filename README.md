@@ -1,2 +1,2 @@
 # HW5 - Midterm
-Still a prototype!
+Basic prototype of a drag-and-drop Flash-style cooking game.
